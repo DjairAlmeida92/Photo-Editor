@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+    <title>Photo Editor</title>
+</head>
+
+<body>
+    <main>
+        <header>
+            <div>
+                <button id="btnResetFilter">Clear Filters</button>
+            </div>
+            <div>
+                <button id="newImg">New Image</button>
+                <button id="btnSalvar"></button>
+            </div>
+        </header>
+
+        <div class="img-content">
+            <input type="text" accept="image/*" style="display: none;">
+            <img src="" alt="">
+        </div>
+
+        <footer>
+            <div class="rotate-content">
+                <button onclick=""><i class=""></i></button>
+                <button onclick=""><i class=""></i></button>
+                <button onclick=""><i class=""></i></button>
+                <button onclick=""><i class=""></i></button>
+            </div>
+
+            <span id="spnRangeValue"></span>
+            <input type="range" style="width: 80%;">
+
+            <div class="filters-content">
+                <button id="filterDefault" class="active">Brilho</button>
+                <button>Contraste</button>
+                <button>Saturation</button>
+                <button>Grew</button>
+                <button>Inversão</button>
+            </div>
+        </footer>
+    </main>
+</body>
+
+</html>
