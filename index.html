@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <script src="./script.js" defer></script>
     <title>Photo Editor</title>
 </head>
@@ -18,32 +20,32 @@
             </div>
             <div>
                 <button id="newImg">New Image</button>
-                <button id="btnSalvar"></button>
+                <button id="btnSalvar">Save</button>
             </div>
         </header>
 
         <div class="img-content">
-            <input type="text" accept="image/*" style="display: none;">
-            <img src="" alt="">
+            <input type="file" accept="image/*" style="display: none;">
+            <img src="./img/default.png" alt="">
         </div>
 
         <footer>
             <div class="rotate-content">
-                <button onclick=""><i class=""></i></button>
-                <button onclick=""><i class=""></i></button>
-                <button onclick=""><i class=""></i></button>
-                <button onclick=""><i class=""></i></button>
+                <button onclick=""><i class="bx bx-rotate-right"></i></button>
+                <button onclick=""><i class="bx bx-rotate-left"></i></button>
+                <button onclick=""><i class="bx bx-reflect-vertical"></i></button>
+                <button onclick=""><i class="bx bx-reflect-horizontal"></i></button>
             </div>
 
             <span id="spnRangeValue"></span>
             <input type="range" style="width: 80%;">
 
             <div class="filters-content">
-                <button id="filterDefault" class="active">Brilho</button>
-                <button>Contraste</button>
+                <button id="filterDefault" class="active">Brightness</button>
+                <button>Contrast</button>
                 <button>Saturation</button>
-                <button>Grew</button>
-                <button>Inversão</button>
+                <button>Grey</button>
+                <button>Inversion</button>
             </div>
         </footer>
     </main>
