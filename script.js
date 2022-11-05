@@ -23,9 +23,9 @@ function init() {
     filters = {
         Brightness: { value: 100, max: 200 },
         Contrast: { value: 100, max: 200 },
-        Saturation: { value: 100, max: 200 },
-        Grey: { value: 0, max: 200 },
-        Inversion: { value: 0, max: 200 },
+        Saturate: { value: 100, max: 200 },
+        Greyscale: { value: 0, max: 200 },
+        Invert: { value: 0, max: 200 },
     };
 
     rotate = 0;
@@ -45,6 +45,21 @@ function init() {
     document.getElementById("filterDefault").classList.add("active");
 }
 
+ButtonsFilter.forEach((item) => {
+    item.onclick = () => {
+        document.querySelector(".active").classList.remove("active");
+
+        item.classList.add("active");
+
+        filterActive = item.innerHTML;
+
+        Range.max = filters[filterActive].max;
+        range.value = filters[filterActive].value;
+
+        spnRangeValue.innerHTML = range.value;
+    };
+});
+
 newImg.onclick = () => inputFile.click();
 
 inputFile.onchange = () => loadNewImage();
@@ -59,6 +74,19 @@ function loadNewImage() {
     init();
 }
 
+range.oninput = () => {
+    filters[filterActive].value = range.value;
+    spnRangeValue.innerHTML = range.value;
+
+    img.style.filter = `
+    brightness(${filters["Brightness"].value}%)
+    contrast(${filters["Contrast"].value}%)
+    saturate(${filters["Saturate"].value}%)
+    grayscale(${filters["Greyscale"].value}%)
+    invert(${filters["Invert"].value}%)
+    `;
+}
+
 function handleDirection(type) {
     if (type === "rotateRight") {
         rotate += 90;
@@ -71,4 +99,38 @@ function handleDirection(type) {
     }
 
     img.style.transform = `rotate(${rotate}deg) scale(${flipY}, ${flipX})`;
+}
+
+btnSalvar.onclick = () => download();
+
+function download () {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    ctx.filter = `
+    brightness(${filters["Brightness"].value}%)
+    contrast(${filters["Contrast"].value}%)
+    saturate(${filters["Saturate"].value}%)
+    grayscale(${filters["Greyscale"].value}%)
+    invert(${filters["Invert"].value}%)
+    `;
+
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    if (rotate !== 0) ctx.rotate((rotate * Math.PI) / 180);
+
+    ctx.scale(flipX, flipY);
+    ctx.drawImage(
+        img,
+        -canvas.width / 2,
+        -canvas.height / 2,
+        canvas.width,
+        canvas.height
+    );
+
+    const link = document.createElement("a");
+    link.download = "NewEditedPhoto.png";
+    link.href = canvas.toDataURL();
+    link.click();
 }
